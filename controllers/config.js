@@ -8,3 +8,11 @@ const imageSize = 200,
       bImage = {
         x: 500, y:150
       };
+
+let ready = 0;
+
+let neuralNetworkKnowledgebase,
+    trainingData = [];
+
+const analyzer = new Analyzer;
+const neural = new NeuralNetwork;

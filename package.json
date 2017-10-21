@@ -4,7 +4,8 @@
   "description": "Neural network for blending two images into one",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/DSlike/nn-image-blending/issues"
   },
-  "homepage": "https://github.com/DSlike/nn-image-blending#readme"
+  "homepage": "https://github.com/DSlike/nn-image-blending#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "nodemon": "^1.12.1"
+  }
 }

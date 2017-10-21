@@ -1,12 +1,17 @@
 const imageSize = 200,
+      parts = 100,
+      partSize = imageSize/parts;
       tImage = {
-        x: 0, y: 100
+        x: 10, y: 100
       },
       pImage = {
-        x: 250, y:100
+        x: 260, y:100
       },
       bImage = {
-        x: 500, y:150
+        x: 510, y:150
+      },
+      fImage = {
+        x: 510, y: 100
       };
 
 let ready = 0;
@@ -16,3 +21,4 @@ let neuralNetworkKnowledgebase,
 
 const analyzer = new Analyzer;
 const neural = new NeuralNetwork;
+const painter = new Painter;

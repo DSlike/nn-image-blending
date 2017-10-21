@@ -6,8 +6,8 @@ var templateImage = new Image;
 var paint = new Image;
 // var brain = new Image;
 
-templateImage.src = 'view/imgs/starry-nigth.jpg';
-paint.src = 'view/imgs/medium.png';
+templateImage.src = 'view/imgs/stars.jpg';
+paint.src = 'view/imgs/scream.jpg';
 // brain.src = 'view/imgs/brain.png';
 
 templateImage.onload = function() {
@@ -17,7 +17,7 @@ templateImage.onload = function() {
 };
 
 paint.onload = function() {
-  ctx.drawImage(paint, pImage.x+50, pImage.y+50, 100, 100);
+  ctx.drawImage(paint, pImage.x, pImage.y, imageSize, imageSize);
   ready++;
   startWork();
 };
@@ -27,7 +27,8 @@ paint.onload = function() {
 // };
 
 function startWork(){
-  // const a = new Analyzer;
-  if(ready == 2)
+  setTimeout(() => {
     analyzer.process();
+  }, 500);
+  return;
 }

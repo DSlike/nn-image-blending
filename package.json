@@ -1,0 +1,19 @@
+{
+  "name": "nn-image-blending",
+  "version": "1.0.0",
+  "description": "Neural network for blending two images into one",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DSlike/nn-image-blending.git"
+  },
+  "author": "Daniel Votintsev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DSlike/nn-image-blending/issues"
+  },
+  "homepage": "https://github.com/DSlike/nn-image-blending#readme"
+}

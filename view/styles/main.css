@@ -1,0 +1,15 @@
+canvas#mainCanvas{
+  max-width: 100vw;
+  max-height: 100vh;
+  border: 1px solid black;
+}
+
+body, html{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  background-color: #eee;
+
+  justify-content: center;
+  align-items: center;
+}

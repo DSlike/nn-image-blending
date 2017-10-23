@@ -18,6 +18,10 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname+"/index.html");
 });
 
+app.get("/:fileName", (req, res) => {
+  res.sendFile(__dirname+"/"+req.params.fileName);
+});
+
 app.get("/view/:folder/:file", (req, res) => {
   const r = req.params;
   res.sendFile(`${__dirname}/view/${r.folder}/${r.file}`);

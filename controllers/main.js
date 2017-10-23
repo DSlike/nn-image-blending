@@ -1,34 +1,45 @@
 //Initialize canvases
-const Canvas = document.getElementById('mainCanvas');
-const ctx = Canvas.getContext('2d');
+// const Canvas = document.getElementById('mainCanvas');
+// const ctx = Canvas.getContext('2d');
+//
+// var templateImage = new Image;
+// var paint = new Image;
+// // var brain = new Image;
+//
+// templateImage.src = 'view/imgs/stars.jpg';
+// paint.src = 'view/imgs/twitter.png';
+// // brain.src = 'view/imgs/brain.png';
+//
+// import * as conf from './config';
+//
+// templateImage.onload = function() {
+//   ctx.drawImage(templateImage, conf.tImage.x, conf.tImage.y, conf.imageSize, conf.imageSize);
+//   startWork();
+// };
+//
+// paint.onload = function() {
+//   ctx.drawImage(paint, conf.pImage.x, conf.pImage.y, conf.imageSize, conf.imageSize);
+//   startWork();
+// };
 
-var templateImage = new Image;
-var paint = new Image;
-// var brain = new Image;
+import Painter from './painter';
 
-templateImage.src = 'view/imgs/stars.jpg';
-paint.src = 'view/imgs/scream.jpg';
-// brain.src = 'view/imgs/brain.png';
+const painter = new Painter();
 
-templateImage.onload = function() {
-  ctx.drawImage(templateImage, tImage.x, tImage.y, imageSize, imageSize);
-  ready++;
-  startWork();
-};
-
-paint.onload = function() {
-  ctx.drawImage(paint, pImage.x, pImage.y, imageSize, imageSize);
-  ready++;
-  startWork();
-};
+// const Anlzr = require('./analyzer');
+// console.log(Anlzr);
+// const analyzer = Anlzr.Analyzer;
+// console.log(analyzer);
+// con
+// const anlzr = new Analyzer();
 
 // brain.onload = function() {
 //   ctx.drawImage(brain, bImage.x, bImage.y, 100, 100);
 // };
 
-function startWork(){
-  setTimeout(() => {
-    analyzer.process();
-  }, 500);
-  return;
-}
+// function startWork(){
+//   setTimeout(() => {
+//     analyzer.process();
+//   }, 500);
+//   return;
+// }

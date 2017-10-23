@@ -2,9 +2,9 @@
 // const Canvas = document.getElementById('mainCanvas');
 // const ctx = Canvas.getContext('2d');
 //
-// var templateImage = new Image;
-// var paint = new Image;
-// // var brain = new Image;
+// let templateImage = new Image;
+// let paint = new Image;
+// // let brain = new Image;
 //
 // templateImage.src = 'view/imgs/stars.jpg';
 // paint.src = 'view/imgs/twitter.png';

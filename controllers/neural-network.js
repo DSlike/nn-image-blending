@@ -15,7 +15,7 @@ const trainer = new Trainer(netWork);
 export default class NeuralNetwork{
   train() {
     console.log("1");
-    var d = conf.trainingData;
+    let d = conf.trainingData;
     trainer.train(d, {
       rate: 0.1,
       log: 10,

@@ -23,7 +23,7 @@ export default class Analyzer {
         const pixels = this.ctx.getImageData(ix, iy, partSize, partSize);
         let data = [];
         // for(let i=0; i<pixels.data.length-4; i+=4){
-        //   var a = (pixels.data[i]+pixels.data[i+1]+pixels.data[i+2])/3;
+        //   let a = (pixels.data[i]+pixels.data[i+1]+pixels.data[i+2])/3;
         //   data.push(a);
         // }
         conf.trainingData.push({
@@ -42,15 +42,15 @@ export default class Analyzer {
   //   // return ctx.getImageData(x*partSize+tImage.x, y*partSize+tImage.y, partSize, partSize);
   // }
   // softmax(output) {
-  //   var maximum = output.reduce(function(p,c) { return p>c ? p : c; });
-  //   var nominators = output.map(function(e) { return Math.exp(e - maximum); });
-  //   var denominator = nominators.reduce(function (p, c) { return p + c; });
-  //   var softmax = nominators.map(function(e) { return e / denominator; });
+  //   let maximum = output.reduce(function(p,c) { return p>c ? p : c; });
+  //   let nominators = output.map(function(e) { return Math.exp(e - maximum); });
+  //   let denominator = nominators.reduce(function (p, c) { return p + c; });
+  //   let softmax = nominators.map(function(e) { return e / denominator; });
   //
-  //   var maxIndex = 0;
+  //   let maxIndex = 0;
   //   softmax.reduce(function(p,c,i){if(p<c) {maxIndex=i; return c;} else return p;});
-  //   var result = [];
-  //   for (var i=0; i<output.length; i++)
+  //   let result = [];
+  //   for (let i=0; i<output.length; i++)
   //   {
   //       if (i==maxIndex)
   //           result.push(1);

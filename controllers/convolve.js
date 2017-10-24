@@ -12,22 +12,11 @@ export function convolveTemplate(data) {
 export function convolveImage(data) {
   data.forEach((e, i) => {
     let d = e.input;
-    console.log(d);
     d = grayscale(d);
     d = contrastImage(d, 10);
     d = simplify(d);
     e.input = d;
   });
-  return data;
-}
-
-function grayscale(data) {
-  for (let i = 0; i < data.length; i += 4) {
-    let brightness = 0.34 * data[i] + 0.5 * data[i + 1] + 0.16 * data[i + 2];
-    data[i] = brightness;
-    data[i + 1] = brightness;
-    data[i + 2] = brightness;
-  }
   return data;
 }
 
@@ -60,9 +49,10 @@ function simplify(data) {
     for (let y = 0; y < sideSize; y++) {
       let index = (x * sideSize + y) * 8;
       let pixel = (data[index] + data[index + 1] + data[index + 2]) / 3;
-      if (pixel > 100)
+      // console.log(pixel);
+      if (pixel > 150)
         matrixData[x][y] = 0;
-      if (pixel <= 100)
+      if (pixel <= 150)
         matrixData[x][y] = 1;
     }
   }

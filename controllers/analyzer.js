@@ -13,11 +13,12 @@ export default class Analyzer {
     this.prepareTemplate();
   }
   prepareTemplate() {
-    for (let x = 0; x < conf.parts; x++) {
-      for (let y = 0; y < conf.parts; y++) {
-        let ix = x * (400 / conf.parts) + conf.tImage.x;
-        let iy = y * (400 / conf.parts) + conf.tImage.y;
-        let partSize = 400 / conf.parts;
+    let parts = 400/(200/conf.parts);
+    for (let x = 0; x < parts; x++) {
+      for (let y = 0; y < parts; y++) {
+        let ix = x * (400 / parts) + conf.tImage.x;
+        let iy = y * (400 / parts) + conf.tImage.y;
+        let partSize = 400 / parts;
         const pixels = this.ctx.getImageData(ix, iy, partSize, partSize);
 
         // this.ctx.rect(ix, iy, partSize, partSize);
@@ -42,9 +43,9 @@ export default class Analyzer {
         let partSize = 200 / conf.parts;
         const pixels = this.ctx.getImageData(ix, iy, partSize, partSize);
 
-        this.ctx.rect(ix, iy, partSize, partSize);
-        this.ctx.strokeStyle = "1px";
-        this.ctx.stroke();
+        // this.ctx.rect(ix, iy, partSize, partSize);
+        // this.ctx.strokeStyle = "1px";
+        // this.ctx.stroke();
 
         imageData.push({
           input: pixels.data,

@@ -17,10 +17,10 @@ export default class NeuralNetwork{
   trainNetwork() {
     let d = conf.trainingData;
     this.trainer.train(d, {
-      rate: 0.1,
+      rate: 0.05,
       log: 10,
-      iterations: 100,
-      error: 0.000000005
+      iterations: 500,
+      error: 0.000016
     });
   }
   getOutput(data){

@@ -1,6 +1,8 @@
 import * as conf from './config';
 import Analyzer from './analyzer';
+import NeuralNetwork from './neural-network';
 
+const neural = new NeuralNetwork();
 const analyzer = new Analyzer();
 
 export default class Painter {
@@ -11,8 +13,8 @@ export default class Painter {
     let templateImage = new Image,
       paint = new Image;
 
-    templateImage.src = 'view/imgs/polyg.jpg',
-      paint.src = 'view/imgs/twitter.png';
+    templateImage.src = 'view/imgs/poly.jpg',
+      paint.src = 'view/imgs/medium.png';
 
     templateImage.onload = function() {
       ctx.drawImage(templateImage, conf.tImage.x, conf.tImage.y, 400, 400);
@@ -28,6 +30,7 @@ export default class Painter {
     }, 1000);
   }
   draw(data) {
+    // neural.trainNetwork();
     const ctx = this.Canvas.getContext('2d');
 
     const imagePartSize = 200 / conf.parts;
@@ -39,18 +42,21 @@ export default class Painter {
       cordinates[0] = cordinates[0] * 400;
       cordinates[1] = cordinates[1] * 400;
 
-      const tx = cordinates[0]*templatePartSize+conf.tImage.x,
-            ty = cordinates[1]*templatePartSize+conf.tImage.y;
-      const ix = e.output[0]*templatePartSize+conf.fImage.x,
-            iy = e.output[1]*templatePartSize+conf.fImage.y;
+      const tx = cordinates[0]*imagePartSize+conf.tImage.x,
+            ty = cordinates[1]*imagePartSize+conf.tImage.y;
+      const ix = e.output[0]*imagePartSize+conf.fImage.x,
+            iy = e.output[1]*imagePartSize+conf.fImage.y;
 
-      const pixels = ctx.getImageData(tx, ty, templatePartSize, templatePartSize);
+      const pixels = ctx.getImageData(tx, ty, imagePartSize, imagePartSize);
       ctx.putImageData(pixels, ix, iy);
 
-      ctx.rect(ix, iy, templatePartSize, templatePartSize);
-      ctx.strokeStyle = "1px";
-      ctx.stroke();
-
+      // ctx.rect(ix, iy, imagePartSize, imagePartSize);
+      // ctx.strokeStyle = "1px";
+      // ctx.stroke();
+      // if(i == data.length-1){
+        // const f = this.draw(analyzer.processImage());
+        // requestAnimationFrame(f);
+      // }
     });
   }
 }

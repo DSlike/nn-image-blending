@@ -1,29 +1,29 @@
 import * as conf from './config';
 
-const Architect = synaptic.Architect;
-const Trainer = synaptic.Trainer;
-
-const input = 1,
-      pool = 40,
-      output = 2,
-      connections = 20,
-      gates = 15;
-
-const netWork = new Architect.Liquid(input, pool, output, connections, gates);
-const trainer = new Trainer(netWork);
-
 export default class NeuralNetwork{
-  train() {
-    console.log("1");
+  constructor(){
+    const Architect = synaptic.Architect;
+    const Trainer = synaptic.Trainer;
+
+    const input = 16,
+          pool = 40,
+          output = 2,
+          connections = 20,
+          gates = 15;
+
+    this.netWork = new Architect.Liquid(input, pool, output, connections, gates);
+    this.trainer = new Trainer(this.netWork);
+  }
+  trainNetwork() {
     let d = conf.trainingData;
-    trainer.train(d, {
+    this.trainer.train(d, {
       rate: 0.1,
       log: 10,
-      iterations: 1000,
-      error: 0.005
+      iterations: 100,
+      error: 0.000000005
     });
   }
   getOutput(data){
-    return netWork.activate(data);
+    return this.netWork.activate(data);
   }
 }

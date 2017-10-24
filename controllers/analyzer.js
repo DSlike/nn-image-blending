@@ -1,5 +1,5 @@
 import * as conf from './config';
-import convolve from './convolve';
+import * as convolve from './convolve';
 import NeuralNetwork from './neural-network';
 
 const neural = new NeuralNetwork();
@@ -10,9 +10,7 @@ export default class Analyzer {
     this.ctx = this.Canvas.getContext('2d');
   }
   process() {
-    // if(!conf.neuralNetworkKnowledgebase){
     this.prepareTemplate();
-    // }
   }
   prepareTemplate() {
     for (let x = 0; x < conf.parts; x++) {
@@ -21,42 +19,44 @@ export default class Analyzer {
         let iy = y * (400 / conf.parts) + conf.tImage.y;
         let partSize = 400 / conf.parts;
         const pixels = this.ctx.getImageData(ix, iy, partSize, partSize);
-        let data = [];
-        // for(let i=0; i<pixels.data.length-4; i+=4){
-        //   let a = (pixels.data[i]+pixels.data[i+1]+pixels.data[i+2])/3;
-        //   data.push(a);
-        // }
+
+        // this.ctx.rect(ix, iy, partSize, partSize);
+        // this.ctx.strokeStyle = "1px";
+        // this.ctx.stroke();
+
         conf.trainingData.push({
+          input: pixels.data,
+          output: [x / 400, y / 400]
+        });
+      }
+    }
+    conf.trainingData = convolve.convolveTemplate(conf.trainingData);
+    neural.trainNetwork();
+  }
+  processImage() {
+    let imageData = [];
+    for (let x = 0; x < conf.parts; x++) {
+      for (let y = 0; y < conf.parts; y++) {
+        let ix = x * (200 / conf.parts) + conf.pImage.x;
+        let iy = y * (200 / conf.parts) + conf.pImage.y;
+        let partSize = 200 / conf.parts;
+        const pixels = this.ctx.getImageData(ix, iy, partSize, partSize);
+
+        this.ctx.rect(ix, iy, partSize, partSize);
+        this.ctx.strokeStyle = "1px";
+        this.ctx.stroke();
+
+        imageData.push({
           input: pixels.data,
           output: [x, y]
         });
       }
     }
-    conf.trainingData = convolve(conf.trainingData);
-    // neural.train();
+    imageData = convolve.convolveImage(imageData);
+    return imageData;
   }
-  // getImagePart(x, y){
-  //   // return ctx.getImageData(x*partSize+pImage.x, y*partSize+pImage.y, partSize, partSize);
-  // }
-  // getTemplatePart(x, y){
-  //   // return ctx.getImageData(x*partSize+tImage.x, y*partSize+tImage.y, partSize, partSize);
-  // }
-  // softmax(output) {
-  //   let maximum = output.reduce(function(p,c) { return p>c ? p : c; });
-  //   let nominators = output.map(function(e) { return Math.exp(e - maximum); });
-  //   let denominator = nominators.reduce(function (p, c) { return p + c; });
-  //   let softmax = nominators.map(function(e) { return e / denominator; });
-  //
-  //   let maxIndex = 0;
-  //   softmax.reduce(function(p,c,i){if(p<c) {maxIndex=i; return c;} else return p;});
-  //   let result = [];
-  //   for (let i=0; i<output.length; i++)
-  //   {
-  //       if (i==maxIndex)
-  //           result.push(1);
-  //       else
-  //           result.push(0);
-  //   }
-  //   return result;
-  // }
+  getCordinates(data) {
+    var result = neural.getOutput(data);
+    return result;
+  }
 }

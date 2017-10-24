@@ -6,7 +6,7 @@ const analyzer = new Analyzer();
 export default class Painter {
   constructor() {
     this.Canvas = document.getElementById('mainCanvas');
-    let ctx = this.Canvas.getContext('2d');
+    const ctx = this.Canvas.getContext('2d');
 
     let templateImage = new Image,
       paint = new Image;
@@ -24,34 +24,33 @@ export default class Painter {
 
     setTimeout(() => {
       analyzer.process();
+      this.draw(analyzer.processImage());
     }, 1000);
   }
-  // start(){
-  //   // let restart = neural.train();
-  //   for(let x=0; x<parts; x++){
-  //     for(let y=0; y<parts; y++){
-  //       let p = analyzer.getImagePart(x,y);
-  //       let data = [];
-  //       for(let i=0; i<p.data.length-4; i+=4){
-  //         let a = (p.data[i]+p.data[i+1]+p.data[i+2])/3
-  //         data.push(a);
-  //       }
-  //       let cordinates = neural.getOutput(data);
-  //       this.draw(x, y, cordinates);
-  //     }
-  //   }
-  //   setTimeout(() => {
-  //     requestAnimationFrame(neural.train);
-  //   }, 1000);
-  // }
-  // draw(x, y, cordinates){
-  //   let cx = Math.abs(cordinates[0]*imageSize),
-  //       cy = Math.abs(cordinates[1]*imageSize);
-  //   const p = analyzer.getTemplatePart(cx, cy);
-  //   let result = analyzer.getImagePart(cx, cy);
-  //   for(let i=0; i<result.data.length; i++){
-  //     result.data[i]=(p.data[i]+result.data[i])/2;
-  //   }
-  //   ctx.putImageData(result, x*partSize+fImage.x, y*partSize+fImage.y);
-  // }
+  draw(data) {
+    const ctx = this.Canvas.getContext('2d');
+
+    const imagePartSize = 200 / conf.parts;
+    const templatePartSize = 400 / conf.parts;
+
+    data.forEach((e, i) => {
+      var cordinates = analyzer.getCordinates(e.input);
+
+      cordinates[0] = cordinates[0] * 400;
+      cordinates[1] = cordinates[1] * 400;
+
+      const tx = cordinates[0]*templatePartSize+conf.tImage.x,
+            ty = cordinates[1]*templatePartSize+conf.tImage.y;
+      const ix = e.output[0]*templatePartSize+conf.fImage.x,
+            iy = e.output[1]*templatePartSize+conf.fImage.y;
+
+      const pixels = ctx.getImageData(tx, ty, templatePartSize, templatePartSize);
+      ctx.putImageData(pixels, ix, iy);
+
+      ctx.rect(ix, iy, templatePartSize, templatePartSize);
+      ctx.strokeStyle = "1px";
+      ctx.stroke();
+
+    });
+  }
 }

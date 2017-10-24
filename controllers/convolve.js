@@ -1,10 +1,21 @@
-export default function convolve(data) {
+export function convolveTemplate(data) {
   data.forEach((e, i) => {
     let d = e.input;
     d = grayscale(d);
     d = contrastImage(d, 10);
     d = simplify(d);
+    e.input = d;
+  });
+  return data;
+}
+
+export function convolveImage(data) {
+  data.forEach((e, i) => {
+    let d = e.input;
     console.log(d);
+    d = grayscale(d);
+    d = contrastImage(d, 10);
+    d = simplify(d);
     e.input = d;
   });
   return data;
@@ -58,23 +69,26 @@ function simplify(data) {
   return convolveData(matrixData);
 }
 
-function convolveData(matrix){
-  let partSize = matrix[0].length/4;
+function convolveData(matrix) {
+  let partSize = matrix[0].length / 4;
   let convolveMatrix = [];
-  // console.log(Math.pow(matrix[0].length,2)/2);
-  for(let px=0; px<4; px++){
-    convolveMatrix[px]=[];
-    for(let py=0; py<4; py++){
-      let sum=0;
-      for(let x=0; x<partSize; x++){
-        for(let y=0; y<partSize; y++){
-          sum+=matrix[x][y];
+  for (let px = 0; px < 4; px++) {
+    for (let py = 0; py < 4; py++) {
+      let sum = 0;
+
+      let Canvas = document.getElementById('mainCanvas');
+      let ctx = Canvas.getContext('2d');
+
+      for (let x = px * partSize; x < px * partSize + partSize; x++) {
+        for (let y = py * partSize; y < py * partSize + partSize; y++) {
+          sum += matrix[x][y];
         }
       }
-      if(sum > 10)
-        convolveMatrix[px][py]=1;
+      if (sum > partSize / 2)
+        convolveMatrix.push(1);
       else
-        convolveMatrix[px][py]=0;
+        convolveMatrix.push(0);
+
     }
   }
   return convolveMatrix;
